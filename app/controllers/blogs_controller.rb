@@ -6,8 +6,6 @@ class BlogsController < ApplicationController
   end
 
   def create
-    p params[:content]
-
     audio_file = params[:audio_file].tempfile
 
     speech = Speech.new(audio_file)
@@ -17,7 +15,6 @@ class BlogsController < ApplicationController
     response = speech.post
 
     speech_text = response.parsed_response['text']
-    
 
     chat = Chat.new(speech_text)
 
@@ -25,16 +22,12 @@ class BlogsController < ApplicationController
     pdf = Pdf.new(pdf_file)
 
     pdf_response = pdf.post
-    p pdf_response
 
     text = chat.split
 
     content = params[:content]
 
     prompt = I18n.t('blog_prompt', arg: content) + text + pdf_response['choices'][0]['message']['content']
-
-    p "最終プロンプトはこちらです"
-    p prompt
 
     Rails.logger.debug '--------- Start converting chat... ---------'
 
