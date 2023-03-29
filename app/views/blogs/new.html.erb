@@ -7,6 +7,9 @@
 
     <%= form.label :pdf_file %>
     <%= form.file_field :pdf_file, class: 'form-control' %>
+
+    <%= form.label :content %>
+    <%= form.text_field :content, class: 'form-control' %>
   </div>
 
   <%= form.submit 'Submit', class: 'btn btn-primary' %>
