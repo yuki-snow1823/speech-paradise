@@ -4,6 +4,9 @@
   <div class="form-group">
     <%= form.label :audio_file %>
     <%= form.file_field :audio_file, class: 'form-control' %>
+
+    <%= form.label :pdf_file %>
+    <%= form.file_field :pdf_file, class: 'form-control' %>
   </div>
 
   <%= form.submit 'Submit', class: 'btn btn-primary' %>
