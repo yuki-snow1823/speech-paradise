@@ -10,34 +10,31 @@ class Chat
   end
 
   def post(text)
-    HTTParty.post(END_POINT,
-                  headers: { 'Content-Type' => 'application/json',
-                             'Authorization' => "Bearer #{ENV['API_KEY']}" },
-                  'Accept' => 'application/json',
-                  body: { model: 'gpt-3.5-turbo',
-                          messages: [{ role: 'user', content: text }] }.to_json, max_tokens: 3000, timeout: 3000)
+    request_body = {
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: text }],
+      max_tokens: 2000
+    }
+    headers = {
+      'Content-Type' => 'application/json',
+      'Authorization' => "Bearer #{ENV['API_KEY']}",
+      'Accept' => 'application/json'
+    }
+
+    HTTParty.post(END_POINT, headers: headers, body: request_body.to_json, timeout: 3000)
   end
 
   def split
     text_blocks = split_string(@prompt)
-
     Rails.logger.debug text_blocks
 
     header_prompt = I18n.t('chat_prompt')
+    Rails.logger.debug header_prompt
 
-    p header_prompt
-
-    # ブロックごとの結果を蓄積するための配列を用意
     clean_text_blocks = []
     text_blocks.each do |text|
       prompt = "#{header_prompt}\n#{text}"
-
-      response = HTTParty.post(END_POINT,
-                               headers: { 'Content-Type' => 'application/json',
-                                          'Authorization' => "Bearer #{ENV['API_KEY']}" },
-                               'Accept' => 'application/json',
-                               body: { model: 'gpt-3.5-turbo',
-                                       messages: [{ role: 'user', content: prompt }] }.to_json, timeout: 3000)
+      response = post(prompt)
 
       Rails.logger.debug '------- Response is... -------'
       Rails.logger.debug response
@@ -49,7 +46,7 @@ class Chat
     clean_text_blocks.join("\n")
   end
 
-  def split_string(string, chunk_size = 2000)
+  def split_string(string, chunk_size = 1500)
     string.scan(/.{1,#{chunk_size}}/)
   end
 end

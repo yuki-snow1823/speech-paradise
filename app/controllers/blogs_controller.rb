@@ -41,5 +41,4 @@ class BlogsController < ApplicationController
 
     redirect_to blog_path(blog)
   end
-
 end
