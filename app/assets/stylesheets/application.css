@@ -13,3 +13,48 @@
  *= require_tree .
  *= require_self
  */
+
+
+/* フォーム全体のスタイル */
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ファイルフィールドのスタイル */
+.form-control-file {
+  margin-bottom: 10px;
+}
+
+/* ラベルのスタイル */
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* コンテンツフィールドのスタイル */
+.form-control {
+  resize: none;
+}
+
+/* サブミットボタンのスタイル */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+}
+
+.title {
+  text-align: center;
+}
