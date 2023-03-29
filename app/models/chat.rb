@@ -23,7 +23,9 @@ class Chat
 
     Rails.logger.debug text_blocks
 
-    header_prompt = I18n.t('blog_prompt')
+    header_prompt = I18n.t('chat_prompt')
+
+    p header_prompt
 
     # ブロックごとの結果を蓄積するための配列を用意
     clean_text_blocks = []
