@@ -75,3 +75,4 @@ end
 
 gem 'httparty'
 gem 'dotenv-rails'
+gem 'pdf-reader'
