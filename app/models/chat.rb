@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Chat
-  attr_accessor :prompt
-
   END_POINT = 'https://api.openai.com/v1/chat/completions'
 
   def initialize(prompt)
@@ -15,6 +13,7 @@ class Chat
       messages: [{ role: 'user', content: text }],
       max_tokens: 2000
     }
+
     headers = {
       'Content-Type' => 'application/json',
       'Authorization' => "Bearer #{ENV['API_KEY']}",
