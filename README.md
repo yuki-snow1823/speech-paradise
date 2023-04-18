@@ -17,8 +17,8 @@ sequenceDiagram
 	autonumber
 	actor User
 	participant app as Rails App
-	participant api_whisper as Whisper API
-	participant api_gpt as GPT API
+	participant api_whisper as Speech to text API
+	participant api_gpt as Chat API
 	User->>app: 音声ファイル(mp3)とスライドをアップロード
 	app->>api_whisper: 音声ファイルを添えてSpeech to textのリクエスト
 	api_whisper ->> app: 文字起こしテキストをレスポンス
